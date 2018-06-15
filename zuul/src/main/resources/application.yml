@@ -1,0 +1,74 @@
+---
+server:
+  port: ${PORT:7777}
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+
+multipart:
+  maxFileSize: 500Mb
+  maxRequestSize: 500Mb
+
+spring:
+  http:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+
+client:
+  url: '*'
+  allowedHeaders: origin, X-Requested-With, content-type, accept, Authorization, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Access-Control-Expose-Headers
+  allowedMethods: GET,POST,DELETE,PUT,HEAD,OPTIONS
+  exceptionUrlPatterns: /v2/docs
+  httpResponseHeaders: X-XSS-Protection,X-Frame-Options,Strict-Transport-Security,X-Permitted-Cross-Domain_Policy,Content-Security-Policy
+  httpResponseHeadersValue: 1; mode=block,SAMEORIGIN,max-age=16070400; includeSubDomains,master-only,default-src
+
+zuul:
+  retryable: true
+  ignored-services: '*'
+  ribbonIsolationStrategy: THREAD
+  host:
+    connect-timeout-millis: 2000
+    socket-timeout-millis: 2000
+  routes:
+    hello-route:
+      path: /hello-service/**
+      service-id: hello-service
+      stripPrefix: true
+      sensitiveHeaders: null
+      retryable: true
+
+management:
+  security:
+    enabled: false            
+
+hello-service:
+  ribbon:
+    ConnectTimeout: 100
+    MaxTotalHttpConnections: 500
+    MaxConnectionsPerHost: 200
+    DeploymentContextBasedVipAddresses: hello-service
+    ReadTimeout: 500
+    OkToRetryOnAllOperations: true
+    retryableStatusCodes: 404, 500, 501, 502, 503
+    MaxAutoRetries: 0
+    MaxAutoRetriesNextServer: 1
+    
+hystrix:
+  threadpool:
+    default:
+      coreSize: 20
+      maximumSize: 100
+      allowMaximumSizeToDivergeFromCoreSize: true
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 10000
