@@ -19,18 +19,18 @@ There are three main projects under this repository.
 ### HelloService
 
 
-      cd it-summit-meetup/helloservice
-      mvn spring-boot:run -DPORT=8090
-      mvn spring-boot:run -DPORT=8091
+     cd it-summit-meetup/helloservice
+     mvn spring-boot:run -DPORT=8090
+     mvn spring-boot:run -DPORT=8091
 
 
 ### Zuul
 
 
-      cd it-summit-meetup/zuul
-      mvn spring-boot:run
+     cd it-summit-meetup/zuul
+     mvn spring-boot:run
 
 
 ## Test
 
-      curl -XGET http://localhost:7777/hello-service/hello
+     curl -XGET http://localhost:7777/hello-service/hello
