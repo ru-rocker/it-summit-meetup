@@ -7,6 +7,9 @@ There are three main projects under this repository.
 * Hello Service: a service to return a message
 * Zuul: an API Gateway for routing/forwarding request path to Hello Service
 
+In the Hello Service, I include micrometer to generate metrics. And the metrics will be
+exposed in prometheus format.
+
 # Run the Demo
 
 ## Prepare the server
