@@ -2,10 +2,10 @@ eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
-    prefer-ip-address: true
+    prefer-ip-address: false
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://172.10.10.10:8761/eureka
 
 spring:
   application:

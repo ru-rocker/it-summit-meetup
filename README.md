@@ -34,6 +34,20 @@ exposed in prometheus format.
      mvn spring-boot:run
 
 
+### Prometheus and Grafana
+
+
+     docker-compose -f prometheus-grafana.yml up -d
+
+
 ## Test
+### Hello Endpoint
+
 
      curl -XGET http://localhost:7777/hello-service/hello
+
+
+### Prometheus Endpoint
+   
+     curl -XGET http://localhost:8090/prometheus
+     curl -XGET http://localhost:8091/prometheus
